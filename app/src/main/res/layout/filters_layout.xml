@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:tool="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+
+        >
+
+       <RadioGroup
+           android:id="@+id/radioGroup"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content">
+
+           <RadioButton
+               android:id="@+id/checkBox_3"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="@string/_3_marla" />
+
+           <RadioButton
+               android:id="@+id/checkBox_5"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="@string/_5_marla" />
+
+           <RadioButton
+               android:id="@+id/checkBox_10"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="@string/_10_marla" />
+       </RadioGroup>
+        <Button
+            android:id="@+id/btnOk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ok"
+            android:layout_gravity="end"
+            />
+    </LinearLayout>
+</layout>

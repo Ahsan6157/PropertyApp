@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="property"
+            type="models.PropertyAddress" />
+
+    </data>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            tools:context="activities.UpdateActivity">
+
+            <EditText
+                android:id="@+id/etCity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="80dp"
+                android:layout_marginRight="10dp"
+                android:hint="@string/city"
+                android:inputType="text" />
+
+            <EditText
+                android:id="@+id/etAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:autofillHints=""
+                android:hint="@string/address"
+                android:inputType="text" />
+            <EditText
+                android:id="@+id/etSize"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:autofillHints=""
+                android:hint="@string/size"
+                android:inputType="text"
+                tools:ignore="TextFields" />
+            <EditText
+                android:id="@+id/etPropertyName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:autofillHints=""
+                android:hint="@string/property_name"
+                android:inputType="text" />
+            <!--kitchen-->
+            <EditText
+                android:id="@+id/etKitchen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:autofillHints=""
+                android:hint="@string/kitchen"
+                android:inputType="number" />
+            <!--room-->
+            <EditText
+                android:id="@+id/etRooms"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:autofillHints=""
+                android:hint="@string/rooms"
+                android:inputType="number" />
+
+            <!--bathrooms-->
+            <EditText
+                android:id="@+id/etWashRoom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:autofillHints=""
+                android:hint="@string/washrooms"
+                android:inputType="number" />
+            <!--furnished/non furnished-->
+            <EditText
+                android:id="@+id/etFurnished"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:autofillHints=""
+                android:hint="@string/furnished_non_furnished"
+                android:inputType="text" />
+            <!--sale/rent-->
+            <EditText
+                android:id="@+id/etSaleRent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:autofillHints=""
+                android:hint="@string/sale_rent"
+                android:inputType="text" />
+            <!--fllors-->
+            <EditText
+                android:id="@+id/etFloors"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:autofillHints=""
+                android:hint="@string/floors"
+                android:inputType="number" />
+
+            <!--price-->
+            <EditText
+                android:id="@+id/etPrice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:autofillHints=""
+                android:hint="@string/price"
+                android:inputType="number" />
+            <Button
+                android:id="@+id/btnUpdate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:text="@string/update" />
+
+        </LinearLayout>
+    </ScrollView>
+</layout>

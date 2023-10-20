@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+    <!--<item
+        android:id="@+id/userName"
+        android:title="@string/usernametext">
+        <menu>
+            <item
+                android:id="@+id/userEmail"
+                android:title="@string/email" />
+            <item android:title="" />
+        </menu>
+    </item>-->
+    <item
+        android:id="@+id/allUsers"
+        android:title="@string/allusers"
+        android:icon="@drawable/baseline_supervised_user_circle_24"
+        />
+    <item
+        android:id="@+id/btnLogout"
+        android:icon="@drawable/baseline_power_settings_new_24"
+        android:title="@string/logout_txt" />
+
+</menu>

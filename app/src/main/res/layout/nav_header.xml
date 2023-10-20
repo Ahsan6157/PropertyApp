@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp">
+    <!-- User Name TextView -->
+    <TextView
+        android:id="@+id/tvHeaderUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="8dp"
+        android:textStyle="bold"
+        android:textColor="@color/blue"
+        android:textSize="20sp"
+        tools:text="User"/>
+
+    <!-- Email TextView -->
+    <TextView
+        android:id="@+id/tvHeaderEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/blue"
+        android:layout_marginBottom="30dp"
+        android:textSize="16sp"
+        tools:text="Email"
+        />
+
+
+</LinearLayout>
