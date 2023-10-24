@@ -9,10 +9,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.Observer
@@ -20,6 +22,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.propertyapp.R
 import com.example.propertyapp.databinding.ActivityHomeBinding
 import com.example.propertyapp.databinding.FiltersLayoutBinding
+import com.google.android.material.navigation.NavigationBarItemView
+import com.google.android.material.navigation.NavigationBarMenu
+import com.google.android.material.navigation.NavigationView
 import helper.PersonDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -27,60 +32,156 @@ import kotlinx.coroutines.launch
 import listeners.OnItemClick
 import models.PropertyAddress
 
-class HomeActivity : AppCompatActivity(), OnItemClick{
+class HomeActivity : AppCompatActivity(), OnItemClick {
     private lateinit var binding: ActivityHomeBinding
     private lateinit var dialogBinding: FiltersLayoutBinding
     private lateinit var database: PersonDatabase
     private lateinit var adapter: Adapter
     private lateinit var data: List<PropertyAddress>
-    private lateinit var actionBarDrawerToggle: ActionBarDrawerToggle
+
+    /*private lateinit var actionBarDrawerToggle: ActionBarDrawerToggle*/
     private lateinit var dialog: Dialog
-    private  var merla3:Boolean?=null
-    private var merla5:Boolean?=null
-    private var merla10:Boolean?=null
-    private var marla5Text:String?=null
-    private var marla10Text:String?=null
+    private var merla3: Boolean? = null
+    private var merla5: Boolean? = null
+    private var merla10: Boolean? = null
+    private var marla5Text: String? = null
+    private var marla10Text: String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)
-        dialogBinding= FiltersLayoutBinding.inflate(layoutInflater)
-        val drawerLayout: DrawerLayout = binding.drawer
         setContentView(binding.root)
+        dialogBinding = FiltersLayoutBinding.inflate(layoutInflater)
+        /*drawerLayout = binding.drawer*/
+        /*drawerLayout.addDrawerListener(actionBarDrawerToggle)*/
         setSupportActionBar(binding.myToolbar)
+
+        val toggle = ActionBarDrawerToggle(
+            this,
+            binding.drawer,
+            binding.myToolbar,
+            R.string.open,
+            R.string.close
+        )
+        toggle.drawerArrowDrawable.color = resources.getColor(R.color.white)
+        binding.drawer.addDrawerListener(toggle)
+        toggle.syncState()
+        binding.navigationView.setNavigationItemSelectedListener { it ->
+            when (it.itemId) {
+                R.id.filters -> {
+
+                    dialogBinding = DataBindingUtil.inflate(
+                        LayoutInflater.from(this),
+                        R.layout.filters_layout,
+                        null,
+                        false
+                    )
+                    dialog = Dialog(this)
+                    dialog.setContentView(dialogBinding.root)
+
+                    dialogBinding.btnOk.setOnClickListener {
+                        dialog.dismiss()
+                        merla3 = dialogBinding.checkBox3.isChecked
+                        merla5 = dialogBinding.checkBox5.isChecked
+                        merla10 = dialogBinding.checkBox10.isChecked
+                        if (merla3 == true) {
+//                         val marla3Text="3 merla"
+
+                            database.propertyAddDo().filteredData("3merla").observe(
+                                this@HomeActivity
+                            ) {
+                                adapter = Adapter(it, this, this)
+                                binding.recyclerView.layoutManager =
+                                    LinearLayoutManager(this@HomeActivity)
+                                binding.recyclerView.adapter = adapter
+                                //                            Toast.makeText(this, "$marla3Text", Toast.LENGTH_LONG).show()
+                            }
+                        } else if (merla5 == true) {
+                            marla5Text = "5merla"
+
+                            database.propertyAddDo().filteredData(marla5Text!!)
+                                .observe(this@HomeActivity,
+                                    Observer {
+                                        adapter = Adapter(it, this@HomeActivity, this@HomeActivity)
+                                        binding.recyclerView.layoutManager =
+                                            LinearLayoutManager(this@HomeActivity)
+                                        with(binding) {
+                                            recyclerView.adapter = adapter
+                                        }
+                                    })
+                        } else if (merla10 == true) {
+                            marla10Text = "10merla"
+                            database.propertyAddDo().filteredData(marla10Text!!).observe(
+                                this@HomeActivity
+                            ) {
+                                adapter = Adapter(it, this@HomeActivity, this@HomeActivity)
+                                binding.recyclerView.layoutManager =
+                                    LinearLayoutManager(this@HomeActivity)
+                                with(binding) {
+                                    recyclerView.adapter = adapter
+                                }
+                            }
+                        }
+
+
+//                    5 maerla
+                    }
+                    /* dialog= Dialog(this)
+                     dialog.setContentView(R.layout.filters_layout);*/
+                    dialog.window?.setLayout(
+                        ViewGroup.LayoutParams.MATCH_PARENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT
+                    )
+                    dialog.setCancelable(false);
+                    dialog.window?.attributes?.windowAnimations
+                    dialog.window
+                    dialog.show()
+                    binding.drawer.closeDrawer(GravityCompat.START)
+                }
+
+
+
+                R.id.logout -> {
+                    SharedPrefs(this).let {
+                        it.remove("email")
+                        it.remove("pass")
+                        it.remove("isLoggedIn")
+                        startActivity(Intent(this, LoginActivity::class.java))
+                        finish()
+                    }
+                    binding.drawer.closeDrawer(GravityCompat.START)
+                    // Return true to indicate that the item click is handled
+                }
+
+                R.id.addPropertyText -> {
+                    startActivity(Intent(this, AddPropertyActivity::class.java))
+                }
+            }
+
+
+
+            false
+        }
+
         database = PersonDatabase.getInstance(this)
         val email = SharedPrefs(this).getStringValue("email", "")
         /*user data */
         val headerView = binding.navigationView.getHeaderView(0)
         val user = headerView.findViewById<TextView>(R.id.tvHeaderUser)
         val mail = headerView.findViewById<TextView>(R.id.tvHeaderEmail)
-// database instance
+
         CoroutineScope(Dispatchers.IO).launch {
             val userData = database.personDao().getUserEmail(email)
             user.text = userData.name
             mail.text = userData.email
         }
-        actionBarDrawerToggle = ActionBarDrawerToggle(
-            this@HomeActivity,
-            binding.drawer,
-            R.string.open,
-            R.string.close
-        )
-        drawerLayout.addDrawerListener(actionBarDrawerToggle)
-        actionBarDrawerToggle.syncState()
-        supportActionBar?.setHomeButtonEnabled(true)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+
+
         getAndSetData()
-        binding.navigationView.setNavigationItemSelectedListener {
-            when(it.itemId){
-                R.id.btnLogout->{
-                    Toast.makeText(this,"Toast",Toast.LENGTH_LONG).show()
-                }
-            }
-            true
-        }
-//dialog
 
     }
+
+
     /*drawer layout inflate*/
 
 
@@ -91,73 +192,17 @@ class HomeActivity : AppCompatActivity(), OnItemClick{
 
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {Boolean
-        when (item.itemId) {
-            /*add propery*/
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        /*   Boolean
+           when (item.itemId) {
+               *//*add propery*//*
             R.id.addPropertyText -> {
                 startActivity(Intent(this, AddPropertyActivity::class.java))
             }
 
-            R.id.filters->{
-                dialogBinding=DataBindingUtil.inflate(LayoutInflater.from(this),R.layout.filters_layout,null,false)
-                dialog = Dialog(this)
-                dialog.setContentView(dialogBinding.root)
 
-                dialogBinding.btnOk.setOnClickListener {
-                    dialog.dismiss()
-                    merla3=dialogBinding.checkBox3.isChecked
-                    merla5=dialogBinding.checkBox5.isChecked
-                    merla10=dialogBinding.checkBox10.isChecked
-                    if(merla3==true) {
-//                         val marla3Text="3 merla"
-
-                                    database.propertyAddDo().filteredData("3merla").observe(this@HomeActivity
-                                    ) {
-                                        adapter = Adapter(it, this, this)
-                                        binding.recyclerView.layoutManager =
-                                            LinearLayoutManager(this@HomeActivity)
-                                        binding.recyclerView.adapter = adapter
-                                        //                            Toast.makeText(this, "$marla3Text", Toast.LENGTH_LONG).show()
-                                    }
-                    }else if(merla5==true){
-                        marla5Text="5merla"
-
-                        database.propertyAddDo().filteredData(marla5Text!!).observe(this@HomeActivity,
-                            Observer {
-                                adapter = Adapter(it,this@HomeActivity,this@HomeActivity)
-                                binding.recyclerView.layoutManager = LinearLayoutManager(this@HomeActivity)
-                                with(binding) {
-                                    recyclerView.adapter = adapter
-                                }
-                            })
-                    }
-                    else if(merla10==true){
-                        marla10Text="10merla"
-                        database.propertyAddDo().filteredData(marla10Text!!).observe(this@HomeActivity
-                        ) {
-                            adapter = Adapter(it, this@HomeActivity, this@HomeActivity)
-                            binding.recyclerView.layoutManager =
-                                LinearLayoutManager(this@HomeActivity)
-                            with(binding) {
-                                recyclerView.adapter = adapter
-                            }
-                        }
-                    }
-
-
-//                    5 maerla
-                }
-               /* dialog= Dialog(this)
-                dialog.setContentView(R.layout.filters_layout);*/
-                dialog.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
-                dialog.setCancelable(false);
-                dialog.window?.attributes?.windowAnimations
-                dialog.window
-                dialog.show()
-//                checkboxes
-            }
             else -> super.onOptionsItemSelected(item)
-        }
+        }*/
         return super.onOptionsItemSelected(item)
     }
 
@@ -222,8 +267,13 @@ class HomeActivity : AppCompatActivity(), OnItemClick{
 
     }
 
-//dialog
 
+    private fun showToast() {
+        Toast.makeText(this, "", Toast.LENGTH_LONG).show()
+    }
+
+
+//dialog
 
 
     /*override fun onNavigationItemSelected(item: MenuItem): Boolean {

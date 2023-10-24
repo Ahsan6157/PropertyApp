@@ -8,8 +8,82 @@
             name="person"
             type="models.Person" />
     </data>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        tools:context="activities.LoginActivity"
+        >
 
-    <LinearLayout
+        <ImageView
+            android:id="@+id/ivUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/etName"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/man" />
+
+        <EditText
+            android:id="@+id/etName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Username"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"/>
+
+        <EditText
+            android:id="@+id/etEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Email"
+            android:layout_below="@+id/etName"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"/>
+
+        <EditText
+            android:id="@+id/etPhone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Phone Number"
+            android:layout_below="@+id/etEmail"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:inputType="phone"
+            />
+
+        <EditText
+            android:id="@+id/etPass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Password"
+            android:layout_below="@+id/etPhone"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"/>
+
+        <Button
+            android:id="@+id/btnLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sign Up"
+            android:layout_below="@+id/etPass"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="24dp"/>
+
+        <TextView
+            android:id="@+id/tvHaveAcc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/already_have_an_account"
+            android:layout_below="@+id/btnLogin"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp"/>
+    </RelativeLayout>
+    <!--<LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -55,8 +129,8 @@
             android:autofillHints=""
             android:hint="@string/enter_password"
             android:inputType="textPassword" />
-<!--Date picker-->
-<!--        <RelativeLayout
+&lt;!&ndash;Date picker&ndash;&gt;
+&lt;!&ndash;        <RelativeLayout
             android:id="@+id/layoutRel"
             android:layout_width="140dp"
             android:layout_height="157dp"
@@ -89,7 +163,7 @@
                 android:layout_height="wrap_content"
                 android:layout_toEndOf="@+id/tvDate"
                 android:src="@drawable/calendar" />
-        </RelativeLayout>-->
+        </RelativeLayout>&ndash;&gt;
 
 
         <Button
@@ -108,5 +182,5 @@
             android:layout_gravity="center"
 
             />
-    </LinearLayout>
+    </LinearLayout>-->
 </layout>

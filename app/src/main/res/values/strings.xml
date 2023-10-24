@@ -36,4 +36,9 @@
     <string name="_5_marla">5 merla</string>
     <string name="_10_marla">10 merla</string>
     <string name="ok">OK</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="filters">Filters</string>
+    <string name="clear_filters">Clear Filters</string>
+    <string name="user_image">User Image</string>
+    <string name="all_properties">All Properties</string>
 </resources>

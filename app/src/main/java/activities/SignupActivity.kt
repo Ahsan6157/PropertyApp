@@ -20,16 +20,18 @@ import java.time.LocalDate
 import java.time.Period
 import java.util.Calendar
 import java.util.regex.Pattern
+
 /*
 * FOR DATE PICKER YOU NEED TO USE DatePickerDialog.OnDateSetListener
 *
 * */
-class SignupActivity : AppCompatActivity(),View.OnClickListener {
+class SignupActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var binding: ActivitySignupBinding
+
     //   1 database instance
     lateinit var database: PersonDatabase
 
-    var age:Int=0
+    var age: Int = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_signup)
@@ -59,7 +61,7 @@ class SignupActivity : AppCompatActivity(),View.OnClickListener {
         } else if (binding.etName.text.length > 15) {
             binding.etName.error = "15 characters allowed"
             return false
-            }
+        }
         return true
     }
 
@@ -82,25 +84,45 @@ class SignupActivity : AppCompatActivity(),View.OnClickListener {
     override fun onClick(v: View?) {
         binding.btnLogin.setOnClickListener {
             if (isNameValid() && isEmailValid() && isValidPassword()) {
-                val p: Person = Person(0, binding.etName.text.toString(), binding.etEmail.text.toString(),binding.etPhone.text.toString(), binding.etPass.text.toString())
-                val p1: Person = Person(0, "Rehman", "anaveedgul@gmail.com","03126360936", "Jhang@#12")
-                val p2: Person = Person(0, "Ali", "anaveedgul@gmail.com","03126360936", "Jhang@#12")
-                val p4: Person = Person(0, "Nalain", "anaveedgul@gmail.com","03126360936", "Jhang@#12")
-                val p5: Person = Person(0, "Farhan", "anaveedgul@gmail.com","03126360936", "Jhang@#12")
-                val p6: Person = Person(0, "Zain", "anaveedgul@gmail.com","03126360936", "Jhang@#12")
-                val p7: Person = Person(0, "Zille", "anaveedgul@gmail.com","03126360936", "Jhang@#12")
-                val p8: Person = Person(0, "Hussain", "HussainMuhammad@gmail.com","03126360936", "Jhang@#12")
-                val p9: Person = Person(0, "Zeeshan", "ZeshanMuhammad@gmail.com","03126360936", "Jhang@#12")
-                val p10: Person = Person(0, "Ahsan", "anaveedgul@gmail.com","03126360936", "Jhang@#12")
-                val p11: Person = Person(0, "Naveed", "anaveedgul@gmail.com","03126360936", "Jhang@#12")
-                val p12: Person = Person(0, "Gul", "anaveedgul@gmail.com","03126360936", "Jhang@#12")
-                val p13: Person = Person(0, "Saad", "anaveedgul@gmail.com","03126360936", "Jhang@#12")
-                val p14: Person = Person(0, "Muzammil", "anaveedgul@gmail.com","03126360936", "Jhang@#12")
-                val p15: Person = Person(0, "Mudassir", "anaveedgul@gmail.com","03126360936", "Jhang@#12")
+                val p: Person = Person(
+                    0,
+                    binding.etName.text.toString(),
+                    binding.etEmail.text.toString(),
+                    binding.etPhone.text.toString(),
+                    binding.etPass.text.toString()
+                )
+                val p1: Person =
+                    Person(0, "Rehman", "anaveedgul@gmail.com", "03126360936", "Jhang@#12")
+                val p2: Person =
+                    Person(0, "Ali", "anaveedgul@gmail.com", "03126360936", "Jhang@#12")
+                val p4: Person =
+                    Person(0, "Nalain", "anaveedgul@gmail.com", "03126360936", "Jhang@#12")
+                val p5: Person =
+                    Person(0, "Farhan", "anaveedgul@gmail.com", "03126360936", "Jhang@#12")
+                val p6: Person =
+                    Person(0, "Zain", "anaveedgul@gmail.com", "03126360936", "Jhang@#12")
+                val p7: Person =
+                    Person(0, "Zille", "anaveedgul@gmail.com", "03126360936", "Jhang@#12")
+                val p8: Person =
+                    Person(0, "Hussain", "HussainMuhammad@gmail.com", "03126360936", "Jhang@#12")
+                val p9: Person =
+                    Person(0, "Zeeshan", "ZeshanMuhammad@gmail.com", "03126360936", "Jhang@#12")
+                val p10: Person =
+                    Person(0, "Ahsan", "anaveedgul@gmail.com", "03126360936", "Jhang@#12")
+                val p11: Person =
+                    Person(0, "Naveed", "anaveedgul@gmail.com", "03126360936", "Jhang@#12")
+                val p12: Person =
+                    Person(0, "Gul", "anaveedgul@gmail.com", "03126360936", "Jhang@#12")
+                val p13: Person =
+                    Person(0, "Saad", "anaveedgul@gmail.com", "03126360936", "Jhang@#12")
+                val p14: Person =
+                    Person(0, "Muzammil", "anaveedgul@gmail.com", "03126360936", "Jhang@#12")
+                val p15: Person =
+                    Person(0, "Mudassir", "anaveedgul@gmail.com", "03126360936", "Jhang@#12")
 
 
-
-                val list:List<Person> = listOf(p,p1,p2,p4,p5,p6,p7,p8,p9,p10,p11,p12,p13,p14,p15)
+                val list: List<Person> =
+                    listOf(p, p1, p2, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15)
 
 
                 database = PersonDatabase.getInstance(this)
