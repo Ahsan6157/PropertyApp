@@ -155,6 +155,22 @@ class HomeActivity : AppCompatActivity(), OnItemClick {
                 R.id.addPropertyText -> {
                     startActivity(Intent(this, AddPropertyActivity::class.java))
                 }
+                R.id.allUsers->{
+                    startActivity(Intent(this,AllUsersActivity::class.java))
+                }
+
+//
+                R.id.clearFilters->{
+                    binding.drawer.closeDrawer(GravityCompat.START)
+                    getAndSetData()
+
+                }
+
+                R.id.allUsers->{
+                    binding.drawer.closeDrawer(GravityCompat.START)
+                    getAndSetData()
+
+                }
             }
 
 
@@ -193,16 +209,16 @@ class HomeActivity : AppCompatActivity(), OnItemClick {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        /*   Boolean
+           Boolean
            when (item.itemId) {
-               *//*add propery*//*
+//               add propery
             R.id.addPropertyText -> {
                 startActivity(Intent(this, AddPropertyActivity::class.java))
             }
 
 
             else -> super.onOptionsItemSelected(item)
-        }*/
+        }
         return super.onOptionsItemSelected(item)
     }
 

@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.example.propertyapp.R
 import com.example.propertyapp.databinding.ActivityAddPropertyBinding
@@ -41,33 +42,38 @@ class AddPropertyActivity : AppCompatActivity(), View.OnClickListener {
     //     val floors = binding.etFloors.text.toString()
     //     val price = binding.etPrice.text.toString()*/
     override fun onClick(v: View?) {
-
+        property = PropertyAddress(
+            0,
+            email,
+            binding.etPropertyName.text.toString(),
+            binding.etAddress.text.toString(),
+            binding.etCity.text.toString(),
+            binding.etSize.text.trim().toString(),
+            binding.etKitchen.text.toString(),
+            binding.etRooms.text.toString(),
+            binding.etWashRoom.text.toString(),
+            binding.etSaleRent.text.toString(),
+            binding.etFloors.text.toString(),
+            binding.etFurnished.text.toString(),
+            binding.etPrice.text.toString()
+        )
         binding.btnAdd.setOnClickListener {
-            sizeValue=binding.etSize.text.trim().toString()
-            if (!sizeValue.equals("3merla")){
+            sizeValue = binding.etSize.text.trim().toString()
+            if (!sizeValue.equals("3merla") || !sizeValue.equals("5merla") || !sizeValue.equals("10merla")) {
+
+                Toast.makeText(this, "Only 3,5,10 merla are allowed ", Toast.LENGTH_LONG).show()
+            } else if
+                           (!sizeValue.equals("3merla")) {
                 binding.etSize.setText("3merla")
-            }else if(!sizeValue.equals("5merla")){
+                launchCoroutine()
+
+            } else if (!sizeValue.equals("5merla")) {
                 binding.etSize.setText("5merla")
-            }
-            else if(!sizeValue.equals("10merla")){
+                launchCoroutine()
+            } else if (!sizeValue.equals("10merla")) {
                 binding.etSize.setText("10merla")
+                launchCoroutine()
             }
-            property = PropertyAddress(
-                0,
-                email,
-                binding.etPropertyName.text.toString(),
-                binding.etAddress.text.toString(),
-                binding.etCity.text.toString(),
-                binding.etSize.text.trim().toString(),
-                binding.etKitchen.text.toString(),
-                binding.etRooms.text.toString(),
-                binding.etWashRoom.text.toString(),
-                binding.etSaleRent.text.toString(),
-                binding.etFloors.text.toString(),
-                binding.etFurnished.text.toString(),
-                binding.etPrice.text.toString()
-            )
-            launchCoroutine()
         }
     }
 

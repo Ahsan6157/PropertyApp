@@ -13,10 +13,10 @@
                 android:icon="@drawable/persons"
                 android:title="@string/allusers" />
 <!--all property-->
-    <item
+  <!--  <item
         android:id="@+id/allProperty"
         android:icon="@drawable/property_list"
-        android:title="@string/all_properties" />
+        android:title="@string/all_properties" />-->
 
             <item
                 android:id="@+id/filters"
